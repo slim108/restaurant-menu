@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | قائمة الطعام</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Noto Naskh Arabic', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4e4bc;
+            direction: rtl;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBkPSJNMzAgMEw1MCAzMEwzMCA2MEwxMCAzMHoiIGZpbGw9IiNmNGU0YmMiIHN0cm9rZT0iI2Q0YzRhYiIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+');
+        }
+        .menu-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border: 2px solid #8b4513;
+            border-radius: 15px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            color: #f4e4bc;
+            margin: -20px -20px 20px -20px;
+            border-radius: 13px 13px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBkPSJNMzAgMEw1MCAzMEwzMCA2MEwxMCAzMHoiIGZpbGw9IiNmNGU0YmMiIGZpbGwtb3BhY2l0eT0iMC4xIiBzdHJva2U9IiNmNGU0YmMiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==');
+            opacity: 0.1;
+        }
+        .restaurant-name {
+            font-size: 3em;
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #f4e4bc;
+            letter-spacing: 2px;
+        }
+        .restaurant-name-en {
+            font-size: 1.5em;
+            margin: 5px 0 15px 0;
+            font-weight: 400;
+            color: #f4e4bc;
+            letter-spacing: 3px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+        .category {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #d4c4ab;
+        }
+        .category-title {
+            color: #8b4513;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #d4c4ab;
+            text-align: center;
+            font-weight: 700;
+        }
+        .item {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #faf6f0;
+            border-radius: 8px;
+            transition: transform 0.2s;
+            border: 1px solid #f4e4bc;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .item:hover {
+            transform: translateX(-5px);
+            background-color: #f4e4bc;
+        }
+        .item-content {
+            flex: 1;
+        }
+        .item-title {
+            font-weight: bold;
+            color: #8b4513;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .item-title-en {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+        .item-price {
+            color: #a0522d;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-align: left;
+            min-width: 100px;
+        }
+        .sub-item {
+            margin-right: 20px;
+            color: #666;
+            font-size: 0.9em;
+            padding: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .sub-item-en {
+            color: #888;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #8b4513;
+            font-size: 0.9em;
+            margin-top: 40px;
+            border-top: 2px solid #d4c4ab;
+            font-style: italic;
+        }
+        .ornament {
+            text-align: center;
+            color: #8b4513;
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        @media (max-width: 600px) {
+            .menu-container {
+                margin: 10px;
+                padding: 10px;
+            }
+            .header {
+                padding: 15px 0;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .category-title {
+                font-size: 1.5em;
+            }
+            .item {
+                flex-direction: column;
+            }
+            .item-price {
+                text-align: right;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="header">
+            <div class="restaurant-name">ولييف</div>
+            <div class="restaurant-name-en">WALIYF</div>
+            <h1>قائمة الطعام | Menu</h1>
+        </div>
+
+        <div class="ornament">❈</div>
+
+        <div class="category">
+            <div class="category-title">شاي | Tea</div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">شاي وليف (مختص)</div>
+                    <div class="item-title-en">Special Wali Tea</div>
+                    <div class="sub-item">
+                        <span>كوب ورق ٠.٣٠٠ بيسه</span>
+                        <span class="sub-item-en">Paper Cup 300 Baisa</span>
+                    </div>
+                    <div class="sub-item">
+                        <span>كوب زجاج =٠.٥٠٠ بيسه</span>
+                        <span class="sub-item-en">Glass Cup 500 Baisa</span>
+                    </div>
+                </div>
+                <div class="item-price"></div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">شاي كرك (مختص)</div>
+                    <div class="item-title-en">Special Karak Tea</div>
+                    <div class="sub-item">
+                        <span>كوب ورق ٠.٣٠٠ بيسه</span>
+                        <span class="sub-item-en">Paper Cup 300 Baisa</span>
+                    </div>
+                    <div class="sub-item">
+                        <span>كوب زجاج =٠.٥٠٠ بيسه</span>
+                        <span class="sub-item-en">Glass Cup 500 Baisa</span>
+                    </div>
+                </div>
+                <div class="item-price"></div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">شاي اخضر</div>
+                    <div class="item-title-en">Green Tea</div>
+                    <div class="sub-item">
+                        <span>كوب ورق ٠.٣٠٠ بيسه</span>
+                        <span class="sub-item-en">Paper Cup 300 Baisa</span>
+                    </div>
+                    <div class="sub-item">
+                        <span>كوب زجاج =٠.٥٠٠ بيسه</span>
+                        <span class="sub-item-en">Glass Cup 500 Baisa</span>
+                    </div>
+                </div>
+                <div class="item-price"></div>
+            </div>
+        </div>
+
+        <div class="ornament">❈</div>
+
+        <div class="category">
+            <div class="category-title">مشروبات بارد | Cold Drinks</div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">آيس تي خوخ</div>
+                    <div class="item-title-en">Peach Iced Tea</div>
+                </div>
+                <div class="item-price">١.٢٠٠ ريال</div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">آيس تي باشن</div>
+                    <div class="item-title-en">Passion Fruit Iced Tea</div>
+                </div>
+                <div class="item-price">١.٢٠٠ ريال</div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">آيس تي فراولة</div>
+                    <div class="item-title-en">Strawberry Iced Tea</div>
+                </div>
+                <div class="item-price">١.٢٠٠ ريال</div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">كركديه</div>
+                    <div class="item-title-en">Hibiscus</div>
+                </div>
+                <div class="item-price">١.٢٠٠ ريال</div>
+            </div>
+        </div>
+
+        <div class="ornament">❈</div>
+
+        <div class="category">
+            <div class="category-title">القهوة | Coffee</div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">قهوة تركيه</div>
+                    <div class="item-title-en">Turkish Coffee</div>
+                </div>
+                <div class="item-price">١.١٠٠ ريال</div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">قهوة v60</div>
+                    <div class="item-title-en">V60 Coffee</div>
+                </div>
+                <div class="item-price">١.٦٠٠ ريال</div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">كوب قهوة عربيه ورق</div>
+                    <div class="item-title-en">Arabic Coffee Paper Cup</div>
+                </div>
+                <div class="item-price">٠.٤٠٠ بيسة</div>
+            </div>
+        </div>
+
+        <div class="ornament">❈</div>
+
+        <div class="category">
+            <div class="category-title">الإبريق | Pot</div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">إبريق وليف(مختص) ٣+٤ اشخاص</div>
+                    <div class="item-title-en">Special Wali Pot (3-4 persons)</div>
+                </div>
+                <div class="item-price">١.٧٠٠ ريال</div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">إبريق شاي كرك (مختص) ٣+٤ اشخاص</div>
+                    <div class="item-title-en">Special Karak Tea Pot (3-4 persons)</div>
+                </div>
+                <div class="item-price">١.٧٠٠ ريال</div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">دلة قهوة عربيه</div>
+                    <div class="item-title-en">Arabic Coffee Pot</div>
+                </div>
+                <div class="item-price">١.٦٠٠ ريال</div>
+            </div>
+        </div>
+
+        <div class="ornament">❈</div>
+
+        <div class="category">
+            <div class="category-title">حلويات | Desserts</div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">شيز كيك</div>
+                    <div class="item-title-en">Cheesecake</div>
+                </div>
+                <div class="item-price">١.٨٠٠ بيسة</div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">سان سبستيان</div>
+                    <div class="item-title-en">San Sebastian</div>
+                </div>
+                <div class="item-price">١.٨٠٠ بيسة</div>
+            </div>
+        </div>
+
+        <div class="ornament">❈</div>
+
+        <div class="category">
+            <div class="category-title">فطائر | Pastries</div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">فطيرة جبن عسل</div>
+                    <div class="item-title-en">Cheese & Honey Pastry</div>
+                    <div class="sub-item">
+                        <span>صغير =٠.٥٠٠ بيسة</span>
+                        <span class="sub-item-en">Small 500 Baisa</span>
+                    </div>
+                    <div class="sub-item">
+                        <span>كبير = ٧٠٠ بيسة</span>
+                        <span class="sub-item-en">Large 700 Baisa</span>
+                    </div>
+                </div>
+                <div class="item-price"></div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">فطيرة جبن زعتر</div>
+                    <div class="item-title-en">Cheese & Thyme Pastry</div>
+                    <div class="sub-item">
+                        <span>صغير = ٠.٥٠٠ بيسة</span>
+                        <span class="sub-item-en">Small 500 Baisa</span>
+                    </div>
+                    <div class="sub-item">
+                        <span>كبير = ٠.٧٠٠ بيسة</span>
+                        <span class="sub-item-en">Large 700 Baisa</span>
+                    </div>
+                </div>
+                <div class="item-price"></div>
+            </div>
+            <div class="item">
+                <div class="item-content">
+                    <div class="item-title">فطيرة نوتيلا</div>
+                    <div class="item-title-en">Nutella Pastry</div>
+                </div>
+                <div class="item-price">٠.٦٠٠ بيسة</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>شكراً لزيارتكم | Thank you for visiting</p>
+            <p>نتمنى لكم تجربة طيبة | We hope you enjoy your experience</p>
+        </div>
+    </div>
+</body>
+</html> 
